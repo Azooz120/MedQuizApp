@@ -32,3 +32,11 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# API Keys and Secrets - DO NOT COMMIT
+Constants.cs
+secrets.json
+appsettings.*.json
+
+# Local configuration
+local.settings.json
