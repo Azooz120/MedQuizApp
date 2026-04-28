@@ -9,6 +9,8 @@ namespace MCQS
         // OpenAI API Key for question generation
         // Get from: https://platform.openai.com/api-keys
         public const string OPENAI_API_KEY = "YOUR_API_KEY_HERE";
+        public const string GroqEndpoint = "https://api.groq.ai/v1/endpoint";
+        public const string GroqKey = "YOUR_GROQ_API_KEY_HERE";
         
         // API Base URL (if using custom backend)
         public const string API_BASE_URL = "https://api.example.com";
