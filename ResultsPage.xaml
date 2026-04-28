@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    
+    xmlns:local="clr-namespace:MCQS"
+    x:Class="MCQS.ResultsPage"
+    Shell.NavBarIsVisible="False">
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        Padding="20,54,20,36">
+        <!-- ── Header ── -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="4"
+            HorizontalOptions="Center">
+            <Label
+                Text="Quiz Complete!"
+                Style="{StaticResource AppTitleLabel}"
+                HorizontalOptions="Center" />
+            <Label
+                x:Name="CategoryLabel"
+                Style="{StaticResource SubtitleLabel}"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <!-- ── Body ── -->
+        <ScrollView
+            Grid.Row="1"
+            Margin="0,24,0,0">
+            <VerticalStackLayout
+                Spacing="20">
+                <!-- Score card -->
+                <Border
+                    Style="{StaticResource Card}">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="{StaticResource ShadowSubtleBrush}"
+                            Offset="0,4"
+                            Radius="12" />
+                    </Border.Shadow>
+                    <VerticalStackLayout
+                        Spacing="16"
+                        HorizontalOptions="Center">
+                        <!-- Score circle -->
+                        <Grid
+                            HorizontalOptions="Center">
+                            <Border
+                                BackgroundColor="{StaticResource IconBadgeBackground}"
+                                StrokeThickness="0"
+                                HeightRequest="130"
+                                WidthRequest="130"
+                                HorizontalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle
+                                        CornerRadius="65" />
+                                </Border.StrokeShape>
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Spacing="0">
+                                    <Label
+                                        x:Name="ScoreLabel"
+                                        FontSize="36"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource Primary}"
+                                        HorizontalOptions="Center" />
+                                    <Label
+                                        x:Name="ScoreOutOfLabel"
+                                        Style="{StaticResource MetaLabel}"
+                                        HorizontalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                        <!-- Performance message -->
+                        <Label
+                            x:Name="PerformanceEmoji"
+                            FontSize="36"
+                            HorizontalOptions="Center" />
+                        <Label
+                            x:Name="PerformanceLabel"
+                            Style="{StaticResource SectionHeadingLabel}"
+                            FontSize="18"
+                            HorizontalOptions="Center" />
+                        <Label
+                            x:Name="PerformanceSubLabel"
+                            Style="{StaticResource SubtitleLabel}"
+                            HorizontalOptions="Center" />
+                        <!-- Stats row -->
+                        <Grid
+                            ColumnDefinitions="*,*,*"
+                            Margin="0,8,0,0">
+                            <!-- Correct -->
+                            <VerticalStackLayout
+                                Grid.Column="0"
+                                Spacing="4"
+                                HorizontalOptions="Center">
+                                <Label
+                                    x:Name="CorrectCount"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="#26de81"
+                                    HorizontalOptions="Center" />
+                                <Label
+                                    Text="Correct"
+                                    Style="{StaticResource MetaLabel}"
+                                    HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                            <!-- Wrong -->
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="4"
+                                HorizontalOptions="Center">
+                                <Label
+                                    x:Name="WrongCount"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="#E53935"
+                                    HorizontalOptions="Center" />
+                                <Label
+                                    Text="Wrong"
+                                    Style="{StaticResource MetaLabel}"
+                                    HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                            <!-- Percentage -->
+                            <VerticalStackLayout
+                                Grid.Column="2"
+                                Spacing="4"
+                                HorizontalOptions="Center">
+                                <Label
+                                    x:Name="PctLabel"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource Primary}"
+                                    HorizontalOptions="Center" />
+                                <Label
+                                    Text="Score"
+                                    Style="{StaticResource MetaLabel}"
+                                    HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Wrong answers section -->
+                <VerticalStackLayout
+                    x:Name="WrongAnswersSection"
+                    Spacing="12">
+                    <Label
+                        Text="REVIEW WRONG ANSWERS"
+                        FontSize="11"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource TextDisabled}"
+                        CharacterSpacing="1.2"
+                        Margin="4,0,0,0" />
+                    <CollectionView
+                        x:Name="WrongList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="local:WrongAnswer">
+                                <Border
+                                    Style="{StaticResource Card}"
+                                    Margin="0,0,0,12">
+                                    <Border.Shadow>
+                                        <Shadow
+                                            Brush="{StaticResource ShadowSubtleBrush}"
+                                            Offset="0,3"
+                                            Radius="8" />
+                                    </Border.Shadow>
+                                    <VerticalStackLayout
+                                        Spacing="10">
+                                        <!-- Question -->
+                                        <Label
+                                            Text="{Binding Question}"
+                                            Style="{StaticResource CardTitleLabel}"
+                                            FontSize="14"
+                                            LineBreakMode="WordWrap" />
+                                        <!-- Your answer -->
+                                        <Grid
+                                            ColumnDefinitions="Auto,*"
+                                            ColumnSpacing="8">
+                                            <Border
+                                                Grid.Column="0"
+                                                BackgroundColor="#FFF0F0"
+                                                StrokeThickness="0"
+                                                HeightRequest="24"
+                                                WidthRequest="24">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle
+                                                        CornerRadius="12" />
+                                                </Border.StrokeShape>
+                                                <Label
+                                                    Text="✕"
+                                                    FontSize="12"
+                                                    TextColor="#E53935"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center" />
+                                            </Border>
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding YourAnswerLabel}"
+                                                Style="{StaticResource MetaLabel}"
+                                                TextColor="#E53935"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                        <!-- Correct answer -->
+                                        <Grid
+                                            ColumnDefinitions="Auto,*"
+                                            ColumnSpacing="8">
+                                            <Border
+                                                Grid.Column="0"
+                                                BackgroundColor="#F0FFF4"
+                                                StrokeThickness="0"
+                                                HeightRequest="24"
+                                                WidthRequest="24">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle
+                                                        CornerRadius="12" />
+                                                </Border.StrokeShape>
+                                                <Label
+                                                    Text="✓"
+                                                    FontSize="12"
+                                                    TextColor="#26de81"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center" />
+                                            </Border>
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding CorrectAnswerLabel}"
+                                                Style="{StaticResource MetaLabel}"
+                                                TextColor="#1a7a3a"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                        <!-- Explanation -->
+                                        <Border
+                                            BackgroundColor="{StaticResource IconBadgeBackground}"
+                                            StrokeThickness="0"
+                                            Padding="10">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle
+                                                    CornerRadius="10" />
+                                            </Border.StrokeShape>
+                                            <Label
+                                                Text="{Binding Explanation}"
+                                                Style="{StaticResource MetaLabel}"
+                                                TextColor="{StaticResource TextBody}"
+                                                LineBreakMode="WordWrap" />
+                                        </Border>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <!-- ── Footer ── -->
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,*"
+            ColumnSpacing="12"
+            Margin="0,16,0,0">
+            <Button
+                Grid.Column="0"
+                Text="← Category"
+                Style="{StaticResource SecondaryButton}"
+                Clicked="OnBackTapped" />
+            <Button
+                Grid.Column="1"
+                Text="Retry 🔁"
+                Style="{StaticResource PrimaryButton}"
+                Clicked="OnRetryTapped" />
+        </Grid>
+    </Grid>
+</ContentPage>

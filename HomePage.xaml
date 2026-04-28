@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    
+    xmlns:local="clr-namespace:MCQS"
+    x:Class="MCQS.HomePage"
+    Shell.NavBarIsVisible="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <!-- ── Header ── -->
+        <Grid
+            Grid.Row="0"
+            Padding="20,50,20,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!-- Title -->
+            <VerticalStackLayout
+                Spacing="2">
+                <Label
+                    Text="Quizora"
+                    Style="{StaticResource AppTitleLabel}" />
+                <Label
+                    Text="My Study Library"
+                    Style="{StaticResource SubtitleLabel}" />
+            </VerticalStackLayout>
+            <!-- FAB -->
+            <Border
+                Grid.Column="1"
+                Style="{StaticResource FabButton}">
+                <!-- FIX: no StaticResource Shadow -->
+                <Border.Shadow>
+                    <Shadow />
+                </Border.Shadow>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="OnAddTapped" />
+                </Border.GestureRecognizers>
+                <Label
+                    Text="+"
+                    FontSize="26"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Border>
+        </Grid>
+        <!-- ── Body ── -->
+        <Grid
+            Grid.Row="1">
+            <!-- Empty State -->
+            <VerticalStackLayout
+                x:Name="EmptyState"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="12">
+                <Label
+                    Text="📚"
+                    FontSize="64"
+                    Opacity="0.6"
+                    HorizontalOptions="Center" />
+                <Label
+                    Text="No categories yet"
+                    Style="{StaticResource EmptyStateHeadingLabel}" />
+                <Label
+                    Text="Tap + to create your first one"
+                    Style="{StaticResource EmptyStateHintLabel}" />
+            </VerticalStackLayout>
+            <!-- Categories -->
+            <ScrollView>
+                <CollectionView
+                    x:Name="CategoryGrid"
+                    Margin="20,10"
+                    IsVisible="False">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Vertical"
+                            Span="2"
+                            VerticalItemSpacing="16"
+                            HorizontalItemSpacing="16" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Style="{StaticResource Card}">
+                                <!-- FIX: no StaticResource Shadow -->
+                                <Border.Shadow>
+                                    <Shadow />
+                                </Border.Shadow>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnCardTapped" />
+                                </Border.GestureRecognizers>
+                                <Grid
+                                    ColumnDefinitions="6,*,Auto"
+                                    ColumnSpacing="12">
+                                    <!-- Color strip -->
+                                    <BoxView
+                                        Grid.Column="0"
+                                        WidthRequest="6"
+                                        CornerRadius="3"
+                                        VerticalOptions="Fill"
+                                        Color="{Binding CardColor}" />
+                                    <!-- Text -->
+                                    <VerticalStackLayout
+                                        Grid.Column="1"
+                                        Spacing="6">
+                                        <Label
+                                            Text="{Binding Name}"
+                                            Style="{StaticResource CardTitleLabel}" />
+                                        <Label
+                                            Text="{Binding PdfCount, StringFormat='{0} PDFs'}"
+                                            Style="{StaticResource MetaLabel}" />
+                                    </VerticalStackLayout>
+                                    <!-- Right -->
+                                    <VerticalStackLayout
+                                        Grid.Column="2"
+                                        Spacing="6"
+                                        HorizontalOptions="End">
+                                        <Border
+                                            Style="{StaticResource IconBadge}">
+                                            <Label
+                                                Text="📄"
+                                                FontSize="18"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center" />
+                                        </Border>
+                                        <Label
+                                            Text="⋯"
+                                            Style="{StaticResource GhostLabel}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Tapped="OnMenuTapped" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+    </Grid>
+</ContentPage>

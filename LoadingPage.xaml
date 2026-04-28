@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MCQS.LoadingPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource PageBackground}">
+    <Grid
+        RowDefinitions="*,Auto,*"
+        Padding="32">
+        <!-- ── Top: Branding ── -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Spacing="12">
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                StrokeThickness="0"
+                HeightRequest="80"
+                WidthRequest="80"
+                HorizontalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle
+                        CornerRadius="24" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow
+                        Brush="{StaticResource ShadowStrongBrush}"
+                        Offset="0,6"
+                        Radius="16" />
+                </Border.Shadow>
+                <Label
+                    Text="🧠"
+                    FontSize="42"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Border>
+            <Label
+                Text="Quizora"
+                Style="{StaticResource AppTitleLabel}"
+                HorizontalOptions="Center"
+                Margin="0,8,0,0" />
+            <Label
+                Text="AI Question Extractor"
+                Style="{StaticResource SubtitleLabel}"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <!-- ── Middle: Progress ── -->
+        <VerticalStackLayout
+            Grid.Row="1"
+            Spacing="20"
+            Margin="0,40">
+            <!-- Stage card -->
+            <Border
+                BackgroundColor="{StaticResource CardBackground}"
+                StrokeThickness="0"
+                Padding="20,18">
+                <Border.StrokeShape>
+                    <RoundRectangle
+                        CornerRadius="20" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow
+                        Brush="{StaticResource ShadowSubtleBrush}"
+                        Offset="0,4"
+                        Radius="12" />
+                </Border.Shadow>
+                <Grid
+                    ColumnDefinitions="48,*"
+                    ColumnSpacing="14">
+                    <!-- Emoji badge -->
+                    <Border
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource IconBadgeBackground}"
+                        StrokeThickness="0"
+                        HeightRequest="48"
+                        WidthRequest="48"
+                        VerticalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle
+                                CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <Label
+                            x:Name="StageEmoji"
+                            Text="📄"
+                            FontSize="26"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Border>
+                    <!-- Status text -->
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="4"
+                        VerticalOptions="Center">
+                        <Label
+                            x:Name="StatusLabel"
+                            Text="Starting…"
+                            Style="{StaticResource CardTitleLabel}"
+                            FontSize="15" />
+                        <Label
+                            x:Name="SubStatusLabel"
+                            Text="Please wait"
+                            Style="{StaticResource MetaLabel}"
+                            FontSize="13" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            <!-- Progress bar -->
+            <VerticalStackLayout
+                Spacing="8">
+                <Grid
+                    ColumnDefinitions="*,Auto">
+                    <Label
+                        Grid.Column="0"
+                        x:Name="ChunkLabel"
+                        Text=""
+                        Style="{StaticResource MetaLabel}"
+                        FontSize="12" />
+                    <Label
+                        Grid.Column="1"
+                        x:Name="ProgressLabel"
+                        Text="0%"
+                        Style="{StaticResource MetaLabel}"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Primary}" />
+                </Grid>
+                <Border
+                    BackgroundColor="{StaticResource IconBadgeBackground}"
+                    StrokeThickness="0"
+                    HeightRequest="10">
+                    <Border.StrokeShape>
+                        <RoundRectangle
+                            CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <Border
+                        x:Name="ProgressFill"
+                        BackgroundColor="{StaticResource Primary}"
+                        StrokeThickness="0"
+                        HeightRequest="10"
+                        HorizontalOptions="Start"
+                        WidthRequest="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle
+                                CornerRadius="5" />
+                        </Border.StrokeShape>
+                    </Border>
+                </Border>
+            </VerticalStackLayout>
+            <!-- Stats row -->
+            <Grid
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="10">
+                <!-- Questions found -->
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="{StaticResource CardBackground}"
+                    StrokeThickness="0"
+                    Padding="12,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle
+                            CornerRadius="14" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+                        Spacing="2"
+                        HorizontalOptions="Center">
+                        <Label
+                            x:Name="QuestionsFoundLabel"
+                            Text="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource Primary}"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Text="Questions"
+                            FontSize="11"
+                            TextColor="{StaticResource TextHint}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Chunks done -->
+                <Border
+                    Grid.Column="1"
+                    BackgroundColor="{StaticResource CardBackground}"
+                    StrokeThickness="0"
+                    Padding="12,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle
+                            CornerRadius="14" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+                        Spacing="2"
+                        HorizontalOptions="Center">
+                        <Label
+                            x:Name="ChunksDoneLabel"
+                            Text="0"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource Primary}"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Text="Chunks Done"
+                            FontSize="11"
+                            TextColor="{StaticResource TextHint}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+                <!-- Time elapsed -->
+                <Border
+                    Grid.Column="2"
+                    BackgroundColor="{StaticResource CardBackground}"
+                    StrokeThickness="0"
+                    Padding="12,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle
+                            CornerRadius="14" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout
+                        Spacing="2"
+                        HorizontalOptions="Center">
+                        <Label
+                            x:Name="TimeLabel"
+                            Text="0s"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource Primary}"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Text="Elapsed"
+                            FontSize="11"
+                            TextColor="{StaticResource TextHint}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            <!-- Dot pulse -->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="8">
+                <BoxView
+                    x:Name="Dot1"
+                    WidthRequest="8"
+                    HeightRequest="8"
+                    CornerRadius="4"
+                    Color="{StaticResource Primary}"
+                    Opacity="1" />
+                <BoxView
+                    x:Name="Dot2"
+                    WidthRequest="8"
+                    HeightRequest="8"
+                    CornerRadius="4"
+                    Color="{StaticResource Primary}"
+                    Opacity="0.4" />
+                <BoxView
+                    x:Name="Dot3"
+                    WidthRequest="8"
+                    HeightRequest="8"
+                    CornerRadius="4"
+                    Color="{StaticResource Primary}"
+                    Opacity="0.4" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <!-- ── Bottom: Error state ── -->
+        <VerticalStackLayout
+            Grid.Row="2"
+            x:Name="ErrorState"
+            IsVisible="False"
+            VerticalOptions="Start"
+            HorizontalOptions="Center"
+            Spacing="12">
+            <Border
+                BackgroundColor="#FFF3F3"
+                StrokeThickness="0"
+                Padding="20,16"
+                HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle
+                        CornerRadius="16" />
+                </Border.StrokeShape>
+                <VerticalStackLayout
+                    Spacing="8"
+                    HorizontalOptions="Center">
+                    <Label
+                        Text="⚠️"
+                        FontSize="32"
+                        HorizontalOptions="Center" />
+                    <Label
+                        x:Name="ErrorLabel"
+                        Text="Something went wrong"
+                        Style="{StaticResource EmptyStateHeadingLabel}"
+                        FontSize="15"
+                        HorizontalOptions="Center" />
+                    <Label
+                        x:Name="ErrorHintLabel"
+                        Text="Your progress has been saved. Tap Retry to continue."
+                        Style="{StaticResource MetaLabel}"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+            <Button
+                Text="↩  Retry"
+                Style="{StaticResource PrimaryButton}"
+                WidthRequest="200"
+                Clicked="OnRetryTapped" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

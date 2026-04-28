@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MCQS.SplashScreen"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.Background>
+        <LinearGradientBrush
+            StartPoint="0,0"
+            EndPoint="1,1">
+            <GradientStop
+                Color="#6C63FF"
+                Offset="0.0" />
+            <GradientStop
+                Color="#4A43D4"
+                Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <VerticalStackLayout
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        Spacing="16">
+        <Border
+            BackgroundColor="#FFFFFF22"
+            StrokeThickness="0"
+            HeightRequest="100"
+            WidthRequest="100"
+            HorizontalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle
+                    CornerRadius="50" />
+            </Border.StrokeShape>
+            <Label
+                Text="Q"
+                FontSize="52"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Border>
+        <Label
+            Text="Quizora"
+            FontSize="42"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalOptions="Center" />
+        <Label
+            Text="Turn your notes into knowledge"
+            FontSize="15"
+            TextColor="#CCFFFFFF"
+            HorizontalOptions="Center" />
+        <ActivityIndicator
+            IsRunning="True"
+            Color="White"
+            Margin="0,30,0,0"
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
